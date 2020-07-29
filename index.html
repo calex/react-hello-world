@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React Hello World</title>
+
+  <link rel='stylesheet' href='styles.css' />
+</head>
+<body>
+    <div id="application-root"></div>
+    
+    <script
+        src="https://unpkg.com/react@16/umd/react.development.js">
+    </script>
+    <script
+        src="https://unpkg.com/react-dom@16/umd/react-dom.development.js">
+    </script>
+    <script
+        src="https://unpkg.com/babel-standalone@6/babel.min.js">
+    </script>
+    <script type="text/babel">
+        const appRoot = document.querySelector('#application-root');
+
+        function Header(props) {
+            return (
+                <header>
+                    <h1>{props.title}</h1>
+                </header>
+            );
+        }
+
+        function ContactInfoSection(props) {
+            return (
+                <section>
+                    <img alt={props.name} src={props.imgUrl} />
+                    <address>
+                        <p><b>{props.name}</b></p>
+                        <p>{props.email}</p>
+                        <p>{props.phoneNumber}</p>
+                    </address>
+                </section>
+            );
+        }
+
+        function EmploymentHistoryListItem(props) {
+            return (
+                <li>
+                    <h3>
+                        {props.companyName}
+                    </h3>
+                    <div>
+                        <p><b>{props.jobTitle}</b> ({props.startDate}&mdash;{props.endDate})</p>
+                        <p>{props.descriptionOfWork}</p>
+                    </div>
+                </li>
+            );
+        }
+
+        function EmploymentHistorySection(props) {
+            return (
+                <section>
+                    <ul>
+                        <EmploymentHistoryListItem companyName='Po Restaurant' jobTitle='Server' startDate='July 2019' endDate='August 2019' descriptionOfWork='Served food to customers that I liked. Took food away from customers I did not like. In-house tastemaker and sommelier.' />
+                        <EmploymentHistoryListItem companyName='Tasty Vibes Magazine' jobTitle='Intern' startDate='June 2018' endDate='December 2018' descriptionOfWork='Led team of over 200 people to points of key profitability. Executed vigorously. Made key executive decisions. Threw things at walls.' />
+                    </ul>
+                </section>
+            );
+        }
+
+        function App(props) {
+            return (
+                <main>{props.children}</main>
+            );
+        }
+
+        const app = <App>
+            <Header title="Sally Student's resume" />
+            <div>
+                <ContactInfoSection imgUrl='images/sally.jpg' name='Sally Student' email='abbyismygoddess@gmail.com' phoneNumber='555-555-5555' />
+                <EmploymentHistorySection />
+            </div>
+        </App>;
+
+        ReactDOM.render(app, appRoot);
+    </script>
+</body>
+</html>
